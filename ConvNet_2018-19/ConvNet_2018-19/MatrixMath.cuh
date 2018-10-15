@@ -11,4 +11,5 @@
 #include <thrust/transform.h>
 
 using namespace thrust;
-using namespace std;
+
+vector<double> deviceToCppVec(device_vector<double> dV, vector<double> vec);

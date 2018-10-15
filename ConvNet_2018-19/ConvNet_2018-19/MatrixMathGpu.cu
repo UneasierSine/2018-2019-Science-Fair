@@ -31,18 +31,18 @@ struct mul
 	}
 };
 
-struct div
+struct division
 {
-	div() {}
+	division() {}
 	__host__ __device__ double operator() (double a, double b)
 	{
 		return a / b;
 	}
 };
 
-struct pow
+struct power
 {
-	pow() {}
+	power() {}
 	__host__ __device__ double operator() (double a, double b)
 	{
 		return std::pow(a, b);
@@ -58,6 +58,16 @@ struct rad
 	}
 };
 
+vector<double> deviceToCppVec(device_vector<double> dV, vector<double> vec)
+{
+	vector<double> returnVec;
+	for (double val : dV)
+	{
+		returnVec.push_back(val);
+	}
+	return returnVec;
+}
+
 vector<double> addMatTermsGpu(vector<double> vec1, vector<double> vec2)
 {
 	vector<double> returnVec(1);
@@ -68,47 +78,120 @@ vector<double> addMatTermsGpu(vector<double> vec1, vector<double> vec2)
 		return returnVec;
 	}
 
-	host_vector<double> h_v1 = vec1;
-	host_vector<double> h_v2 = vec2;
-
 	device_vector<double> d_rV(vec1.size());
 
-	device_vector<double> d_v1 = h_v1;
-	device_vector<double> d_v2 = h_v1;
+	device_vector<double> d_v1 = vec1;
+	device_vector<double> d_v2 = vec2;
 
 	transform(d_v1.begin(), d_v1.end(), d_v2.begin, d_rV.begin(), add());
 
-	for (int i = 0; i < d_rV.size(); i++)
-	{
-		returnVec[i] = d_rV[i];
-	}
-
+	deviceToCppVec(d_rV, returnVec);
 	return returnVec;
 }
 
 vector<double> subMatTermsGpu(vector<double> vec1, vector<double> vec2)
 {
+	vector<double> returnVec(1);
 
+	if (vec1.size() != vec2.size())
+	{
+		returnVec[0] = -1;
+		return returnVec;
+	}
+
+	device_vector<double> d_rV(vec1.size());
+
+	device_vector<double> d_v1 = vec1;
+	device_vector<double> d_v2 = vec2;
+
+	transform(d_v1.begin(), d_v1.end(), d_v2.begin, d_rV.begin(), sub());
+
+	deviceToCppVec(d_rV, returnVec);
+	return returnVec;
 }
 
 vector<double> mulMatTermsGpu(vector<double> vec1, vector<double> vec2)
 {
+	vector<double> returnVec(1);
 
+	if (vec1.size() != vec2.size())
+	{
+		returnVec[0] = -1;
+		return returnVec;
+	}
+
+	device_vector<double> d_rV(vec1.size());
+
+	device_vector<double> d_v1 = vec1;
+	device_vector<double> d_v2 = vec2;
+
+	transform(d_v1.begin(), d_v1.end(), d_v2.begin, d_rV.begin(), mul());
+
+	deviceToCppVec(d_rV, returnVec);
+	return returnVec;
 }
 
 vector<double> divMatTermsGpu(vector<double> vec1, vector<double> vec2)
 {
+	vector<double> returnVec(1);
 
+	if (vec1.size() != vec2.size())
+	{
+		returnVec[0] = -1;
+		return returnVec;
+	}
+
+	device_vector<double> d_rV(vec1.size());
+
+	device_vector<double> d_v1 = vec1;
+	device_vector<double> d_v2 = vec2;
+
+	transform(d_v1.begin(), d_v1.end(), d_v2.begin, d_rV.begin(), division());
+
+	deviceToCppVec(d_rV, returnVec);
+	return returnVec;
 }
 
 vector<double> powMatTermsGpu(vector<double> vec1, vector<double> vec2)
 {
+	vector<double> returnVec(1);
 
+	if (vec1.size() != vec2.size())
+	{
+		returnVec[0] = -1;
+		return returnVec;
+	}
+
+	device_vector<double> d_rV(vec1.size());
+
+	device_vector<double> d_v1 = vec1;
+	device_vector<double> d_v2 = vec2;
+
+	transform(d_v1.begin(), d_v1.end(), d_v2.begin, d_rV.begin(), power());
+
+	deviceToCppVec(d_rV, returnVec);
+	return returnVec;
 }
 
 vector<double> radMatTermsGpu(vector<double> vec1, vector<double> vec2)
 {
+	vector<double> returnVec(1);
 
+	if (vec1.size() != vec2.size())
+	{
+		returnVec[0] = -1;
+		return returnVec;
+	}
+
+	device_vector<double> d_rV(vec1.size());
+
+	device_vector<double> d_v1 = vec1;
+	device_vector<double> d_v2 = vec2;
+
+	transform(d_v1.begin(), d_v1.end(), d_v2.begin, d_rV.begin(), rad());
+
+	deviceToCppVec(d_rV, returnVec);
+	return returnVec;
 }
 
 double sumTermsGpu(vector<double> vector)
