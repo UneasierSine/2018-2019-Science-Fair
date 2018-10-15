@@ -194,12 +194,26 @@ vector<double> radMatTermsGpu(vector<double> vec1, vector<double> vec2)
 	return returnVec;
 }
 
-double sumTermsGpu(vector<double> vector)
+double sumTermsGpu(vector<double> vec)
 {
-
+	device_vector<double> d_v = vec;
+	return reduce(d_v.begin(), d_v.end());
 }
 
 double dotProductGpu(vector<double> vec1, vector<double> vec2)
 {
+	vector<double> returnVec(1);
 
+	if (vec1.size() != vec2.size())
+	{
+		return -1;
+	}
+
+	device_vector<double> d_rV(vec1.size());
+
+	device_vector<double> d_v1 = vec1;
+	device_vector<double> d_v2 = vec2;
+
+	transform(d_v1.begin(), d_v1.end(), d_v2.begin, d_rV.begin(), mul());
+	return reduce(d_rV.begin(), d_rV.end());
 }
