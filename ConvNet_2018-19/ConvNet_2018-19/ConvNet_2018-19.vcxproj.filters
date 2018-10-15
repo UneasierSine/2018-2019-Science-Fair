@@ -19,6 +19,12 @@
     <Filter Include="Source Files\Matrix_Math">
       <UniqueIdentifier>{76aea2e1-e951-4225-b715-754fb2235940}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Activation_Functions">
+      <UniqueIdentifier>{c2df8e80-f1af-4088-9d80-8cce64cea979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Activation_Functions">
+      <UniqueIdentifier>{7b0ce4e1-a954-4440-955f-7f38902b571e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -33,6 +39,9 @@
     <ClInclude Include="MatrixMath.h">
       <Filter>Header Files\Matrix_Math</Filter>
     </ClInclude>
+    <ClInclude Include="ActivationFunctions.h">
+      <Filter>Header Files\Activation_Functions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -43,6 +52,9 @@
     </ClCompile>
     <ClCompile Include="MatrixMath.cpp">
       <Filter>Source Files\Matrix_Math</Filter>
+    </ClCompile>
+    <ClCompile Include="ActivationFunctions.cpp">
+      <Filter>Source Files\Activation_Functions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
