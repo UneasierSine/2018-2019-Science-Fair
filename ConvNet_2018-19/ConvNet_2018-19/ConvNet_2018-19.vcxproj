@@ -152,6 +152,7 @@
     <ClInclude Include="ActivationFunctions.h" />
     <ClInclude Include="MatrixMath.cuh" />
     <ClInclude Include="MatrixMath.h" />
+    <ClInclude Include="Optimizers.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -159,6 +160,7 @@
     <ClCompile Include="ActivationFunctions.cpp" />
     <ClCompile Include="ConvNet_2018-19.cpp" />
     <ClCompile Include="MatrixMath.cpp" />
+    <ClCompile Include="Optimizers.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

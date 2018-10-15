@@ -42,6 +42,9 @@
     <ClInclude Include="ActivationFunctions.h">
       <Filter>Header Files\Activation_Functions</Filter>
     </ClInclude>
+    <ClInclude Include="Optimizers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -55,6 +58,9 @@
     </ClCompile>
     <ClCompile Include="ActivationFunctions.cpp">
       <Filter>Source Files\Activation_Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="Optimizers.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

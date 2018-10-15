@@ -1,6 +1,8 @@
 #include <vector>
 #include "MatrixMath.h"
 #include <math.h>
+#include <algorithm>
+#include <functional>
 
 using namespace std;
 
@@ -14,10 +16,7 @@ vector<double> addMat(vector<double> vec1, vector<double> vec2)
 	}
 	else
 	{
-		for (int i = 0; i < vec1.size(); i++)
-		{
-			returnVector[i] = vec1[i] + vec2[i];
-		}
+		transform(vec1.begin(), vec1.end(), vec2.begin(), plus<double>());
 		return returnVector;
 	}
 }
@@ -32,10 +31,7 @@ vector<double> subMat(vector<double> vec1, vector<double> vec2)
 	}
 	else
 	{
-		for (int i = 0; i < vec1.size(); i++)
-		{
-			returnVector[i] = vec1[i] - vec2[i];
-		}
+		transform(vec1.begin(), vec1.end(), vec2.begin(), minus<double>());
 		return returnVector;
 	}
 }
@@ -50,10 +46,7 @@ vector<double> mulMat(vector<double> vec1, vector<double> vec2)
 	}
 	else
 	{
-		for (int i = 0; i < vec1.size(); i++)
-		{
-			returnVector[i] = vec1[i] * vec2[i];
-		}
+		transform(vec1.begin(), vec1.end(), vec2.begin(), multiplies<double>());
 		return returnVector;
 	}
 }
@@ -68,10 +61,7 @@ vector<double> divMat(vector<double> vec1, vector<double> vec2)
 	}
 	else
 	{
-		for (int i = 0; i < vec1.size(); i++)
-		{
-			returnVector[i] = vec1[i] / vec2[i];
-		}
+		transform(vec1.begin(), vec1.end(), vec2.begin(), divides<double>());
 		return returnVector;
 	}
 }
@@ -131,10 +121,7 @@ double dotProduct(vector<double> vec1, vector<double> vec2)
 	}
 	else
 	{
-		for (int i = 0; i < vec1.size(); i++)
-		{
-			returnVector[i] = vec1[i] - vec2[i];
-		}
+		transform(vec1.begin(), vec1.end(), vec2.begin(), multiplies<double>());
 	}
 
 	return sumTerms(returnVector);
