@@ -16,14 +16,14 @@ vector<double> radMatTerms(vector<double> vec1, vector<double> vec2);
 double sumTerms(vector<double> vector);
 double dotProduct(vector<double> vec1, vector<double> vec2);
 
-//GPU methods basic matrix index operations
-vector<double> addMatTermsGpu(vector<double> vec1, vector<double> vec2);
-vector<double> subMatTermsGpu(vector<double> vec1, vector<double> vec2);
-vector<double> mulMatTermsGpu(vector<double> vec1, vector<double> vec2);
-vector<double> divMatTermsGpu(vector<double> vec1, vector<double> vec2);
-vector<double> powMatTermsGpu(vector<double> vec1, vector<double> vec2);
-vector<double> radMatTermsGpu(vector<double> vec1, vector<double> vec2);
-
-//GPU methods matrix-specific
-double sumTermsGpu(vector<double> vector);
-double dotProductGpu(vector<double> vec1, vector<double> vec2);
+////GPU methods basic matrix index operations
+//vector<double> addMatTermsGpu(vector<double> vec1, vector<double> vec2);
+//vector<double> subMatTermsGpu(vector<double> vec1, vector<double> vec2);
+//vector<double> mulMatTermsGpu(vector<double> vec1, vector<double> vec2);
+//vector<double> divMatTermsGpu(vector<double> vec1, vector<double> vec2);
+//vector<double> powMatTermsGpu(vector<double> vec1, vector<double> vec2);
+//vector<double> radMatTermsGpu(vector<double> vec1, vector<double> vec2);
+//
+////GPU methods matrix-specific
+//double sumTermsGpu(vector<double> vector);
+//double dotProductGpu(vector<double> vec1, vector<double> vec2);

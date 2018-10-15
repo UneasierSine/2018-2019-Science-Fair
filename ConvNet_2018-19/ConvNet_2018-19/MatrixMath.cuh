@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <vector>
 
 #include <cuda.h>
 #include <cuda_runtime.h>
@@ -13,5 +14,3 @@
 #include <thrust/reduce.h>
 
 using namespace thrust;
-
-vector<double> deviceToCppVec(device_vector<double> dV, vector<double> vec);

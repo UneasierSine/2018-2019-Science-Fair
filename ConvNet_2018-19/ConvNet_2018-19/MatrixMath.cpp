@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include <vector>
 #include "MatrixMath.h"
 #include <math.h>
@@ -16,7 +17,7 @@ vector<double> addMat(vector<double> vec1, vector<double> vec2)
 	}
 	else
 	{
-		transform(vec1.begin(), vec1.end(), vec2.begin(), plus<double>());
+		std::transform(vec1.begin(), vec1.end(), vec2.begin(), returnVector.begin(), plus<double>());
 		return returnVector;
 	}
 }
@@ -31,7 +32,7 @@ vector<double> subMat(vector<double> vec1, vector<double> vec2)
 	}
 	else
 	{
-		transform(vec1.begin(), vec1.end(), vec2.begin(), minus<double>());
+		transform(vec1.begin(), vec1.end(), vec2.begin(), returnVector.begin(), minus<double>());
 		return returnVector;
 	}
 }
@@ -46,7 +47,7 @@ vector<double> mulMat(vector<double> vec1, vector<double> vec2)
 	}
 	else
 	{
-		transform(vec1.begin(), vec1.end(), vec2.begin(), multiplies<double>());
+		transform(vec1.begin(), vec1.end(), vec2.begin(), returnVector.begin(), multiplies<double>());
 		return returnVector;
 	}
 }
@@ -61,7 +62,7 @@ vector<double> divMat(vector<double> vec1, vector<double> vec2)
 	}
 	else
 	{
-		transform(vec1.begin(), vec1.end(), vec2.begin(), divides<double>());
+		transform(vec1.begin(), vec1.end(), vec2.begin(), returnVector.begin(), divides<double>());
 		return returnVector;
 	}
 }
@@ -121,7 +122,7 @@ double dotProduct(vector<double> vec1, vector<double> vec2)
 	}
 	else
 	{
-		transform(vec1.begin(), vec1.end(), vec2.begin(), multiplies<double>());
+		transform(vec1.begin(), vec1.end(), vec2.begin(), returnVector.begin(), multiplies<double>());
 	}
 
 	return sumTerms(returnVector);

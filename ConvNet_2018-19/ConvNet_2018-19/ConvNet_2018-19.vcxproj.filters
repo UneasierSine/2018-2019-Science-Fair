@@ -39,9 +39,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MatrixMath.cuh">
-      <Filter>Header Files\Matrix_Math</Filter>
-    </ClInclude>
     <ClInclude Include="MatrixMath.h">
       <Filter>Header Files\Matrix_Math</Filter>
     </ClInclude>
@@ -68,10 +65,5 @@
     <ClCompile Include="Optimizers.cpp">
       <Filter>Source Files\Optimizers</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <CudaCompile Include="MatrixMathGpu.cu">
-      <Filter>Source Files\Matrix_Math</Filter>
-    </CudaCompile>
   </ItemGroup>
 </Project>
