@@ -25,6 +25,12 @@
     <Filter Include="Header Files\Activation_Functions">
       <UniqueIdentifier>{7b0ce4e1-a954-4440-955f-7f38902b571e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Optimizers">
+      <UniqueIdentifier>{873c9c79-3c27-4a95-b986-cc714b2e9316}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Optimizers">
+      <UniqueIdentifier>{b420339f-4def-4823-8f0a-de2badf2562d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -43,7 +49,7 @@
       <Filter>Header Files\Activation_Functions</Filter>
     </ClInclude>
     <ClInclude Include="Optimizers.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Optimizers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -60,7 +66,7 @@
       <Filter>Source Files\Activation_Functions</Filter>
     </ClCompile>
     <ClCompile Include="Optimizers.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Optimizers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
