@@ -48,6 +48,9 @@
     <ClInclude Include="Optimizers.h">
       <Filter>Header Files\Optimizers</Filter>
     </ClInclude>
+    <ClInclude Include="FCNeuralNetwork.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -64,6 +67,9 @@
     </ClCompile>
     <ClCompile Include="Optimizers.cpp">
       <Filter>Source Files\Optimizers</Filter>
+    </ClCompile>
+    <ClCompile Include="FRNeuralNetwork.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
