@@ -9,7 +9,7 @@ using namespace std;
 
 vector<double> addMat(vector<double> vec1, vector<double> vec2)
 {
-	vector<double> returnVector = vector<double>();
+	vector<double> returnVector(vec1.size());
 	if (vec1.size() != vec2.size())
 	{
 		returnVector[0] = -1;
@@ -24,7 +24,7 @@ vector<double> addMat(vector<double> vec1, vector<double> vec2)
 
 vector<double> subMat(vector<double> vec1, vector<double> vec2)
 {
-	vector<double> returnVector = vector<double>();
+	vector<double> returnVector(vec1.size());
 	if (vec1.size() != vec2.size())
 	{
 		returnVector[0] = -1;
@@ -39,7 +39,7 @@ vector<double> subMat(vector<double> vec1, vector<double> vec2)
 
 vector<double> mulMat(vector<double> vec1, vector<double> vec2)
 {
-	vector<double> returnVector = vector<double>();
+	vector<double> returnVector(vec1.size());
 	if (vec1.size() != vec2.size())
 	{
 		returnVector[0] = -1;
@@ -54,7 +54,7 @@ vector<double> mulMat(vector<double> vec1, vector<double> vec2)
 
 vector<double> divMat(vector<double> vec1, vector<double> vec2)
 {
-	vector<double> returnVector = vector<double>();
+	vector<double> returnVector(vec1.size());
 	if (vec1.size() != vec2.size())
 	{
 		returnVector[0] = -1;
@@ -69,7 +69,7 @@ vector<double> divMat(vector<double> vec1, vector<double> vec2)
 
 vector<double> powMat(vector<double> vec1, vector<double> vec2)
 {
-	vector<double> returnVector = vector<double>();
+	vector<double> returnVector(vec1.size());
 	if (vec1.size() != vec2.size())
 	{
 		returnVector[0] = -1;
@@ -87,7 +87,7 @@ vector<double> powMat(vector<double> vec1, vector<double> vec2)
 
 vector<double> radMat(vector<double> vec1, vector<double> vec2)
 {
-	vector<double> returnVector = vector<double>();
+	vector<double> returnVector(vec1.size());
 	if (vec1.size() != vec2.size())
 	{
 		returnVector[0] = -1;
@@ -115,7 +115,7 @@ double sumTerms(vector<double> vector)
 
 double dotProduct(vector<double> vec1, vector<double> vec2)
 {
-	vector<double> returnVector = vector<double>();
+	vector<double> returnVector(vec1.size());
 	if (vec1.size() != vec2.size())
 	{
 		return -1;
