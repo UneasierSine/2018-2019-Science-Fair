@@ -1,6 +1,8 @@
 #pragma once
 
 #include <vector>
+#include <random>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -15,6 +17,13 @@ vector<double> radMatTerms(vector<double> vec1, vector<double> vec2);
 //Matrix-specific operations
 double sumTerms(vector<double> vector);
 double dotProduct(vector<double> vec1, vector<double> vec2);
+
+struct gaussianRandom
+{
+	std::normal_distribution<double> dist;
+	gaussianRandom();
+	double operator()(double x);
+};
 
 ////GPU methods basic matrix index operations
 //vector<double> addMatTermsGpu(vector<double> vec1, vector<double> vec2);
