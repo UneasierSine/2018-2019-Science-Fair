@@ -1,6 +1,7 @@
 #include "FCNeuralNetwork.h"
+#include "stdafx.h"
 
-FC_NN::FC_NN(std::string activationFunc, vector<int> layers)
+FC_NN::FC_NN(string activationFunc, vector<int> layers)
 {
 	num_inputs = layers[0];
 	num_outputs = layers.back();

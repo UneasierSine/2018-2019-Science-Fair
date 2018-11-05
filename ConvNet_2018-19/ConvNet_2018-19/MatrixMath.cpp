@@ -1,4 +1,5 @@
 #include "MatrixMath.h"
+#include "stdafx.h"
 
 
 using namespace std;

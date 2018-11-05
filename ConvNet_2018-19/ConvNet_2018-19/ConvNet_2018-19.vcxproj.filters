@@ -51,6 +51,9 @@
     <ClInclude Include="FCNeuralNetwork.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ConvNet_2018-2019.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

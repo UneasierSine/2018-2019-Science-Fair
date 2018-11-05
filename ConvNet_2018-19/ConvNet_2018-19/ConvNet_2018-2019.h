@@ -1,0 +1,9 @@
+#pragma once
+#include "stdafx.h"
+#include "MatrixMath.h"
+#include "Optimizers.h"
+#include "ActivationFunctions.h"
+#include "FCNeuralNetwork.h"
+#include "iostream"
+#include <math.h>
+#include <vector>

@@ -130,39 +130,39 @@ double softPlusDeriv(double x)
 
 activationFunction::activationFunction(std::string typeFunction)
 {
-	if (typeFunction.find("identity") == true)
+	if (typeFunction.find("identity") >= 0)
 	{
 		function = &identity;
 	}
-	else if (typeFunction.find("binaryStep") == true)
+	else if (typeFunction.find("binaryStep") >= 0)
 	{
 		function = &binaryStep;
 	}
-	else if (typeFunction.find("logistic") == true)
+	else if (typeFunction.find("logistic") >= 0)
 	{
 		function = &logistic;
 	}
-	else if (typeFunction.find("tanh") == true)
+	else if (typeFunction.find("tanh") >= 0)
 	{
 		function = &tanhFunc;
 	}
-	else if (typeFunction.find("arctan") == true)
+	else if (typeFunction.find("arctan") >= 0)
 	{
 		function = &arctan;
 	}
-	else if (typeFunction.find("relu") == true)
+	else if (typeFunction.find("relu") >= 0)
 	{
 		function = &relu;
 	}
-	else if (typeFunction.find("prelu") == true)
+	else if (typeFunction.find("prelu") >= 0)
 	{
 		function = &prelu;
 	}
-	else if (typeFunction.find("elu") == true)
+	else if (typeFunction.find("elu") >= 0)
 	{
 		function = &elu;
 	}
-	else if (typeFunction.find("softPlus") == true)
+	else if (typeFunction.find("softPlus") >= 0)
 	{
 		function = &softPlus;
 	}
@@ -175,39 +175,39 @@ double activationFunction::operator()(double x)
 
 activationFunctionDeriv::activationFunctionDeriv(std::string typeFunction)
 {
-	if (typeFunction.find("identity") == true)
+	if (typeFunction.find("identity") >= 0)
 	{
 		function = &identityDeriv;
 	}
-	else if (typeFunction.find("binaryStep") == true)
+	else if (typeFunction.find("binaryStep") >= 0)
 	{
 		function = &binaryStepDeriv;
 	}
-	else if (typeFunction.find("logistic") == true)
+	else if (typeFunction.find("logistic") >= 0)
 	{
 		function = &logisticDeriv;
 	}
-	else if (typeFunction.find("tanh") == true)
+	else if (typeFunction.find("tanh") >= 0)
 	{
 		function = &tanhDeriv;
 	}
-	else if (typeFunction.find("arctan") == true)
+	else if (typeFunction.find("arctan") >= 0)
 	{
 		function = &arctanDeriv;
 	}
-	else if (typeFunction.find("relu") == true)
+	else if (typeFunction.find("relu") >= 0)
 	{
 		function = &reluDeriv;
 	}
-	else if (typeFunction.find("prelu") == true)
+	else if (typeFunction.find("prelu") >= 0)
 	{
 		function = &preluDeriv;
 	}
-	else if (typeFunction.find("elu") == true)
+	else if (typeFunction.find("elu") >= 0)
 	{
 		function = &eluDeriv;
 	}
-	else if (typeFunction.find("softPlus") == true)
+	else if (typeFunction.find("softPlus") >= 0)
 	{
 		function = &softPlusDeriv;
 	}

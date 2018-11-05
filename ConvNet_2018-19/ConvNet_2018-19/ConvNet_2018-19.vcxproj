@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ActivationFunctions.h" />
+    <ClInclude Include="ConvNet_2018-2019.h" />
     <ClInclude Include="FCNeuralNetwork.h" />
     <ClInclude Include="MatrixMath.h" />
     <ClInclude Include="Optimizers.h" />

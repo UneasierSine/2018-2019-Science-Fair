@@ -2,8 +2,6 @@
 #include <math.h>
 #include <string>
 
-double alpha;
-
 //Base activation functions
 double identity(double x);
 double binaryStep(double x);
