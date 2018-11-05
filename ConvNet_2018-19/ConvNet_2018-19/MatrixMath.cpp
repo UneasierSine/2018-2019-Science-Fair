@@ -1,10 +1,5 @@
-#include "stdafx.h"
-#include <vector>
-#include <stdlib.h>
 #include "MatrixMath.h"
-#include <math.h>
-#include <algorithm>
-#include <functional>
+
 
 using namespace std;
 
@@ -129,14 +124,9 @@ double dotProduct(vector<double> vec1, vector<double> vec2)
 	return sumTerms(returnVector);
 }
 
-gaussianRandom::gaussianRandom()
-{
-	gaussianRandom::dist.mean = 0.0;
-	gaussianRandom::dist.stddev = 1.0;
-}
-
 double gaussianRandom::operator()(double x)
 {
+	std::normal_distribution<double> dist(0.0, 1.0);
 	double val = rand();
-	return gaussianRandom::dist(val);
+	return dist(val);
 }

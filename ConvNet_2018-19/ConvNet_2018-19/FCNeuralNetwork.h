@@ -4,6 +4,7 @@
 #include <vector>
 #include <math.h>
 #include <string.h>
+#include <random>
 
 class FC_NN
 {
@@ -11,15 +12,29 @@ private:
 	int num_hiddenLayers;
 	int num_inputs;
 	int num_outputs;
+	int num_neurons;
+
+	std::string activation;
 
 	gaussianRandom dist;
+
+	vector<int> NNlayers = { 0 };
+	vector<double> bias;
 	vector<vector<double>> inputs;
 	vector<vector<double>> outputs;
 	vector<vector<vector<double>>> weights;
 
-public:
-	activationFunction activation;
-	activationFunctionDeriv activationDeriv;
+	activationFunction activation = activationFunction("identity");
+	activationFunctionDeriv activationDeriv = activationFunctionDeriv("identity");
 
+public:
 	FC_NN(std::string activationFunc, vector<int> layers);
+
+	vector<double> feedforwardTemplate(vector<double> inputsVec);
+	vector<double> feedforwardTemplate(vector<double> inputsVec, vector<vector<int>> droppedOut);
+
+	vector<double> feedforwardPreserve(vector<double> inputsVec);
+	vector<double> feedforwardPreserve(vector<double> inputsVec, vector<vector<int>> droppedOut);
 };
+
+vector<vector<int>> dropoutNeurons(vector<int> layerData, double dropoutRate);
