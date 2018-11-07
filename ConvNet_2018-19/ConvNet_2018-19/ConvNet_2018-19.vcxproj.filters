@@ -48,10 +48,10 @@
     <ClInclude Include="Optimizers.h">
       <Filter>Header Files\Optimizers</Filter>
     </ClInclude>
-    <ClInclude Include="FCNeuralNetwork.h">
+    <ClInclude Include="ConvNet_2018-2019.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ConvNet_2018-2019.h">
+    <ClInclude Include="FC_NN.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -71,7 +71,7 @@
     <ClCompile Include="Optimizers.cpp">
       <Filter>Source Files\Optimizers</Filter>
     </ClCompile>
-    <ClCompile Include="FRNeuralNetwork.cpp">
+    <ClCompile Include="FC_NN.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

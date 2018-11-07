@@ -1,6 +1,5 @@
-#include "MatrixMath.h"
 #include "stdafx.h"
-
+#include "MatrixMath.h"
 
 using namespace std;
 

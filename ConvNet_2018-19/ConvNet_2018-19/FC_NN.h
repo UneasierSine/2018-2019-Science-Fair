@@ -3,7 +3,7 @@
 #include "MatrixMath.h"
 #include <vector>
 #include <math.h>
-#include <string.h>
+#include <string>
 #include <random>
 
 class FC_NN
@@ -14,7 +14,7 @@ private:
 	int num_outputs;
 	int num_neurons;
 
-	std::string activation;
+	std::string activationStr;
 
 	gaussianRandom dist;
 

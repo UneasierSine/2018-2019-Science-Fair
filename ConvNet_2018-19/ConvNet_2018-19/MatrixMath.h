@@ -2,9 +2,6 @@
 #include <vector>
 #include <random>
 #include <stdlib.h>
-#include "stdafx.h"
-#include <vector>
-#include <stdlib.h>
 #include <math.h>
 #include <algorithm>
 #include <functional>
@@ -27,15 +24,3 @@ struct gaussianRandom
 {
 	double operator()(double x);
 };
-
-////GPU methods basic matrix index operations
-//vector<double> addMatTermsGpu(vector<double> vec1, vector<double> vec2);
-//vector<double> subMatTermsGpu(vector<double> vec1, vector<double> vec2);
-//vector<double> mulMatTermsGpu(vector<double> vec1, vector<double> vec2);
-//vector<double> divMatTermsGpu(vector<double> vec1, vector<double> vec2);
-//vector<double> powMatTermsGpu(vector<double> vec1, vector<double> vec2);
-//vector<double> radMatTermsGpu(vector<double> vec1, vector<double> vec2);
-//
-////GPU methods matrix-specific
-//double sumTermsGpu(vector<double> vector);
-//double dotProductGpu(vector<double> vec1, vector<double> vec2);

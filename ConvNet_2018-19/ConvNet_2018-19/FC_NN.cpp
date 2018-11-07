@@ -1,12 +1,12 @@
-#include "FCNeuralNetwork.h"
 #include "stdafx.h"
+#include "FC_NN.h"
 
-FC_NN::FC_NN(string activationFunc, vector<int> layers)
+FC_NN::FC_NN(std::string activationFunc, vector<int> layers)
 {
 	num_inputs = layers[0];
 	num_outputs = layers.back();
 
-	activation = activationFunc;
+	activationStr = activationFunc;
 	FC_NN::activation = activationFunction(activationFunc);
 	FC_NN::activationDeriv = activationFunctionDeriv(activationFunc);
 
@@ -37,7 +37,7 @@ FC_NN::FC_NN(string activationFunc, vector<int> layers)
 	{
 		for (vector<double> layer : vecs)
 		{
-			numNeurons += layer.size();
+			numNeurons += (int)layer.size();
 		}
 	}
 
@@ -75,7 +75,7 @@ vector<double> FC_NN::feedforwardTemplate(vector<double> inputsVec, vector<vecto
 			double droppedOutSum = 0;
 			for (int dONeuron : droppedOut[i])
 			{
-				droppedOutSum = droppedOutSum + outputs[i][dONeuron] * weights[i][n][droppedOutSum];
+				droppedOutSum = droppedOutSum + outputs[i][dONeuron] * weights[i][n][dONeuron];
 			}
 
 			inputs[i + 1][n] = inputs[i + 1][n] - droppedOutSum;
@@ -127,7 +127,7 @@ vector<double> FC_NN::feedforwardPreserve(vector<double> inputsVec, vector<vecto
 			double droppedOutSum = 0;
 			for (int dONeuron : droppedOut[i])
 			{
-				droppedOutSum = droppedOutSum + outputsClone[i][dONeuron] * weightsClone[i][n][droppedOutSum];
+				droppedOutSum = droppedOutSum + outputsClone[i][dONeuron] * weightsClone[i][n][dONeuron];
 			}
 
 			inputsClone[i + 1][n] = inputsClone[i + 1][n] - droppedOutSum;
@@ -154,7 +154,7 @@ vector<vector<int>> dropoutNeurons(vector<int> layerData, double dropoutRate)
 	}
 	
 	std::shuffle(std::begin(nums), std::end(nums), rng);
-	nums.resize(dropoutRate * nums.size());
+	nums.resize((int)(dropoutRate * nums.size()));
 	std::sort(nums.begin(), nums.end());
 
 	vector<vector<int>> droppedOutNeurons;
