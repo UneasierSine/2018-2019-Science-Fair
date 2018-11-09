@@ -141,8 +141,7 @@ vector<double> FC_NN::feedforwardPreserve(vector<double> inputsVec, vector<vecto
 vector<vector<int>> dropoutNeurons(vector<int> layerData, double dropoutRate)
 {
 	vector<int> nums;
-	std::default_random_engine rng = std::default_random_engine{};
-
+	
 	int num = 0;
 	for (int val : layerData)
 	{
@@ -153,7 +152,7 @@ vector<vector<int>> dropoutNeurons(vector<int> layerData, double dropoutRate)
 		}
 	}
 	
-	std::shuffle(std::begin(nums), std::end(nums), rng);
+	random_shuffle(nums.begin(), nums.end());
 	nums.resize((int)(dropoutRate * nums.size()));
 	std::sort(nums.begin(), nums.end());
 

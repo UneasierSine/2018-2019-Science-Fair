@@ -4,6 +4,7 @@
 #include <vector>
 #include <math.h>
 #include <string>
+#include <iterator>
 #include <random>
 
 class FC_NN

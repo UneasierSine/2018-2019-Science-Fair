@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MatrixMath.h"
+#include <random>
 
 using namespace std;
 
@@ -127,6 +128,6 @@ double dotProduct(vector<double> vec1, vector<double> vec2)
 double gaussianRandom::operator()(double x)
 {
 	std::normal_distribution<double> dist(0.0, 1.0);
-	double val = rand();
-	return dist(val);
+	std::default_random_engine gen;
+	return dist(gen);
 }
