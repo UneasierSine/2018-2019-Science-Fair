@@ -1,6 +1,8 @@
 #pragma once
 #include "ActivationFunctions.h"
 #include "MatrixMath.h"
+#include "error.h"
+
 #include <vector>
 #include <math.h>
 #include <string>
@@ -28,8 +30,11 @@ private:
 	activationFunction activation = activationFunction("identity");
 	activationFunctionDeriv activationDeriv = activationFunctionDeriv("identity");
 
+	errorFunction errorFunc = errorFunction("squared error");
+	errorFunctionDeriv errorFuncDeriv = errorFunctionDeriv("squared error");
+
 public:
-	FC_NN(std::string activationFunc, vector<int> layers);
+	FC_NN(std::string activationFunc, std::string errorFunctionName, vector<int> layers);
 
 	vector<double> feedforwardTemplate(vector<double> inputsVec);
 	vector<double> feedforwardTemplate(vector<double> inputsVec, vector<vector<int>> droppedOut);
@@ -37,7 +42,8 @@ public:
 	vector<double> feedforwardPreserve(vector<double> inputsVec);
 	vector<double> feedforwardPreserve(vector<double> inputsVec, vector<vector<int>> droppedOut);
 
-	
+	vector<double> feedforwardError(vector<double> inputsVec, vector<double> labels);
+	vector<double> feedforwardError(vector<double> inputsVec, vector<vector<int>> droppedOut, vector<double> labels);
 };
 
 vector<vector<int>> dropoutNeurons(vector<int> layerData, double dropoutRate);

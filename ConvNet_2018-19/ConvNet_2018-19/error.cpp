@@ -84,7 +84,7 @@ errorFunctionDeriv::errorFunctionDeriv(std::string typeFunction)
 	}
 }
 
-vector<double> errorFunction::operator()(vector<double> actual, vector<double> predicted)
+vector<double> errorFunctionDeriv::operator()(vector<double> actual, vector<double> predicted)
 {
 	return function(actual, predicted);
 }

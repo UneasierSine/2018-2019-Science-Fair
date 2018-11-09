@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "FC_NN.h"
 
-FC_NN::FC_NN(std::string activationFunc, vector<int> layers)
+FC_NN::FC_NN(std::string activationFunc, std::string errorFunctionName, vector<int> layers)
 {
 	num_inputs = layers[0];
 	num_outputs = layers.back();
@@ -9,6 +9,9 @@ FC_NN::FC_NN(std::string activationFunc, vector<int> layers)
 	activationStr = activationFunc;
 	FC_NN::activation = activationFunction(activationFunc);
 	FC_NN::activationDeriv = activationFunctionDeriv(activationFunc);
+
+	FC_NN::errorFunc = errorFunction(errorFunctionName);
+	FC_NN::errorFuncDeriv = errorFunctionDeriv(errorFunctionName);
 
 	FC_NN::NNlayers = layers;
 
@@ -136,6 +139,16 @@ vector<double> FC_NN::feedforwardPreserve(vector<double> inputsVec, vector<vecto
 
 	std::transform(inputsClone[inputsClone.size() - 1].begin(), inputsClone[inputs.size() - 1].end(), outputsClone[outputsClone.size() - 1].begin(), activation);
 	return outputsClone[outputsClone.size() - 1];
+}
+
+vector<double> FC_NN::feedforwardError(vector<double> inputsVec, vector<double> labels)
+{
+	return errorFunc.function(labels, feedforwardPreserve(inputsVec));
+}
+
+vector<double> FC_NN::feedforwardError(vector<double> inputsVec, vector<vector<int>> droppedOut, vector<double> labels)
+{
+	return errorFunc.function(labels, feedforwardPreserve(inputsVec, droppedOut));
 }
 
 vector<vector<int>> dropoutNeurons(vector<int> layerData, double dropoutRate)
