@@ -36,6 +36,8 @@ public:
 
 	vector<double> feedforwardPreserve(vector<double> inputsVec);
 	vector<double> feedforwardPreserve(vector<double> inputsVec, vector<vector<int>> droppedOut);
+
+	
 };
 
 vector<vector<int>> dropoutNeurons(vector<int> layerData, double dropoutRate);

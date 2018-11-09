@@ -82,6 +82,16 @@ vector<double> powMat(vector<double> vec1, vector<double> vec2)
 	}
 }
 
+vector<double> powMat(vector<double> vec, double x)
+{
+	vector<double> returnVector(vec.size());
+	for (int i = 0; i < vec.size(); i++)
+	{
+		returnVector[i] = pow(vec[i], x);
+	}
+	return returnVector;
+}
+
 vector<double> radMat(vector<double> vec1, vector<double> vec2)
 {
 	vector<double> returnVector(vec1.size());

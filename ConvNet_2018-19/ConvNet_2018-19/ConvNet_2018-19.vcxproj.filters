@@ -31,6 +31,12 @@
     <Filter Include="Header Files\Optimizers">
       <UniqueIdentifier>{b420339f-4def-4823-8f0a-de2badf2562d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Error">
+      <UniqueIdentifier>{45e23533-2202-437b-9989-7fc3d3147bad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Error">
+      <UniqueIdentifier>{8e6b7462-3f2d-46d9-866e-d4b21f7c2e37}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -54,6 +60,9 @@
     <ClInclude Include="FC_NN.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="error.h">
+      <Filter>Header Files\Error</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -73,6 +82,9 @@
     </ClCompile>
     <ClCompile Include="FC_NN.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="error.cpp">
+      <Filter>Source Files\Error</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

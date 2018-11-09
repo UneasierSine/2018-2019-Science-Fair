@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClInclude Include="ActivationFunctions.h" />
     <ClInclude Include="ConvNet_2018-2019.h" />
+    <ClInclude Include="error.h" />
     <ClInclude Include="FC_NN.h" />
     <ClInclude Include="MatrixMath.h" />
     <ClInclude Include="Optimizers.h" />
@@ -160,6 +161,7 @@
   <ItemGroup>
     <ClCompile Include="ActivationFunctions.cpp" />
     <ClCompile Include="ConvNet_2018-19.cpp" />
+    <ClCompile Include="error.cpp" />
     <ClCompile Include="FC_NN.cpp" />
     <ClCompile Include="MatrixMath.cpp" />
     <ClCompile Include="Optimizers.cpp" />

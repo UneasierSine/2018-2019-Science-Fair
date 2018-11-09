@@ -13,6 +13,7 @@ vector<double> subMat(vector<double> vec1, vector<double> vec2);
 vector<double> mulMat(vector<double> vec1, vector<double> vec2);
 vector<double> divMat(vector<double> vec1, vector<double> vec2);
 vector<double> powMat(vector<double> vec1, vector<double> vec2);
+vector<double> powMat(vector<double> vec, double x);
 vector<double> radMat(vector<double> vec1, vector<double> vec2);
 
 //Matrix-specific operations
