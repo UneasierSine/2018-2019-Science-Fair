@@ -1,50 +1,34 @@
 #include "stdafx.h"
 #include "error.h"
 
-vector<double> squaredError(vector<double> actual, vector<double> predicted)
+double squaredError(double actual, double predicted)
 {
-	return powMat(subMat(actual, predicted),2);
+	return pow(actual - predicted,2);
 }
 
-vector<double> squaredLogError(vector<double> actual, vector<double> predicted)
+double squaredLogError(double actual, double predicted)
 {
-	vector<double> returnVector;
-	for (int i = 0; i < actual.size(); i++)
-	{
-		returnVector.push_back(pow(std::log(actual[i] + 1.0) - std::log(predicted[i] + 1),2));
-	}
-	return returnVector;
+	return pow(std::log(actual + 1.0) - std::log(predicted + 1.0),2);
 }
 
-vector<double> l1Loss(vector<double> actual, vector<double> predicted)
+double l1Loss(double actual, double predicted)
 {
-	return subMat(actual, predicted);
+	return actual - predicted;
 }
 
-vector<double> squaredErrorDeriv(vector<double> actual, vector<double> predicted)
+double squaredErrorDeriv(double actual, double predicted)
 {
-	vector<double> returnVector;
-	for (int i = 0; i < actual.size(); i++)
-	{
-		returnVector.push_back(-2.0 * (actual[i] - predicted[i]));
-	}
-	return returnVector;
+	return -2.0 * (actual - predicted);
 }
 
-vector<double> squaredLogErrorDeriv(vector<double> actual, vector<double> predicted)
+double squaredLogErrorDeriv(double actual, double predicted)
 {
-	vector<double> returnVector;
-	for (int i = 0; i < actual.size(); i++)
-	{
-		returnVector.push_back( -2.0*(log(actual[i] + 1) - log(predicted[i] + 1)) / (predicted[i] + 1) );
-	}
-	return returnVector;
+	return  -2.0*(log(actual + 1) - log(predicted + 1)) / (predicted + 1);
 }
 
-vector<double> l1LossDeriv(vector<double> actual, vector<double> predicted)
+double l1LossDeriv(double actual, double predicted)
 {
-	vector<double> returnVector(actual.size(), -1);
-	return returnVector;
+	return -1;
 }
 
 errorFunction::errorFunction(std::string typeFunction)
@@ -63,7 +47,7 @@ errorFunction::errorFunction(std::string typeFunction)
 	}
 }
 
-vector<double> errorFunction::operator()(vector<double> actual, vector<double> predicted)
+double errorFunction::operator()(double actual, double predicted)
 {
 	return function(actual, predicted);
 }
@@ -84,7 +68,7 @@ errorFunctionDeriv::errorFunctionDeriv(std::string typeFunction)
 	}
 }
 
-vector<double> errorFunctionDeriv::operator()(vector<double> actual, vector<double> predicted)
+double errorFunctionDeriv::operator()(double actual, double predicted)
 {
 	return function(actual, predicted);
 }

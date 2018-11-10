@@ -27,12 +27,7 @@ FC_NN::FC_NN(std::string activationFunc, std::string errorFunctionName, vector<i
 
 	for (int i = 0; i < layers.size() - 1; i++)
 	{
-		FC_NN::weights.push_back(vector<vector<double>> (inputs[i + 1].size()));
-
-		for (vector<double> vec : weights[i])
-		{
-			vec = vector<double> (outputs[i].size(),FC_NN::dist(0));
-		}
+		FC_NN::weights.push_back(vector<vector<double>> (inputs[i + 1].size(), vector<double> (outputs[i].size(), dist(0))));
 	}
 
 	int numNeurons = 0;
@@ -143,12 +138,58 @@ vector<double> FC_NN::feedforwardPreserve(vector<double> inputsVec, vector<vecto
 
 vector<double> FC_NN::feedforwardError(vector<double> inputsVec, vector<double> labels)
 {
-	return errorFunc.function(labels, feedforwardPreserve(inputsVec));
+	vector<double> results = feedforwardPreserve(inputsVec);
+	vector<double> errors = vector<double>(results.size());
+	transform(labels.begin(), labels.end(), results.begin(), errors.begin(), errorFuncDeriv);
 }
 
 vector<double> FC_NN::feedforwardError(vector<double> inputsVec, vector<vector<int>> droppedOut, vector<double> labels)
 {
-	return errorFunc.function(labels, feedforwardPreserve(inputsVec, droppedOut));
+	vector<double> results = feedforwardPreserve(inputsVec, droppedOut);
+	vector<double> errors = vector<double>(results.size());
+	transform(labels.begin(), labels.end(), results.begin(), errors.begin(), errorFuncDeriv);
+}
+
+vector<vector<vector<double>>> FC_NN::backprop(vector<double> actual, vector<double> predicted)
+{
+	vector<vector<double>> grads;
+	vector<double> errors = vector<double>(actual.size());
+
+	for (vector<double> column : inputs)
+	{
+		grads.push_back(vector<double>(column.size(), 0.0));
+	}
+
+	vector<vector<vector<double>>> weightGradients;
+	for (int x = 0; x < weights.size(); x++)
+	{
+		for (int y = 0; y < weights[x].size(); y++)
+		{
+			for (int z = 0; z < weights[x][y].size(); z++)
+			{
+				weightGradients[x][y][z] = 0.0;
+			}
+		}
+	}
+
+	transform(actual.begin(), actual.end(), predicted.begin(), errors.begin(), errorFuncDeriv);
+	grads[grads.size() - 1] = errors;
+
+	int layerNum = (int)grads.size() - 1;
+	while (layerNum > 0)
+	{
+		for_each(grads[layerNum].begin(), grads[layerNum].end(), activationDeriv);
+		for (int x = 0; x < grads[layerNum].size(); x++)
+		{
+			for (int y = 0; y < grads[layerNum - 1].size(); y++)
+			{
+				weightGradients[layerNum][x][y] = (grads[layerNum][y] * grads[layerNum+1][x]);
+				grads[layerNum - 1][y] += weights[layerNum][x][y] * grads[layerNum+1][x];
+			}
+		}
+		layerNum--;
+	}
+	return weightGradients;
 }
 
 vector<vector<int>> dropoutNeurons(vector<int> layerData, double dropoutRate)

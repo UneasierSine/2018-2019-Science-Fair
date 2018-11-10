@@ -9,24 +9,24 @@
 
 using namespace std;
 
-vector<double> squaredError(vector<double> actual, vector<double> predicted);
-vector<double> squaredLogError(vector<double> actual, vector<double> predicted);
-vector<double> l1Loss(vector<double> actual, vector<double> predicted);
+double squaredError(double actual, double predicted);
+double squaredLogError(double actual, double predicted);
+double l1Loss(double actual, double predicted);
 
-vector<double> squaredErrorDeriv(vector<double> actual, vector<double> predicted);
-vector<double> squaredLogErrorDeriv(vector<double> actual, vector<double> predicted);
-vector<double> l1LossDeriv(vector<double> actual, vector<double> predicted);
+double squaredErrorDeriv(double actual, double predicted);
+double squaredLogErrorDeriv(double actual, double predicted);
+double l1LossDeriv(double actual, double predicted);
 
 struct errorFunction
 {
-	vector<double> (*function)(vector<double>, vector<double>);
+	double (*function)(double, double);
 	errorFunction(std::string typeFunction);
-	vector<double> operator()(vector<double> actual, vector<double> predicted);
+	double operator()(double actual, double predicted);
 };
 
 struct errorFunctionDeriv
 {
-	vector<double> (*function)(vector<double>, vector<double>);
+	double (*function)(double, double);
 	errorFunctionDeriv(std::string typeFunction);
-	vector<double> operator()(vector<double> actual, vector<double> predicted);
+	double operator()(double actual, double predicted);
 };
