@@ -2,8 +2,13 @@
 #include "stdafx.h"
 #include "MatrixMath.h"
 #include "Optimizers.h"
+#include "error.h"
 #include "ActivationFunctions.h"
-#include "FCNeuralNetwork.h"
-#include "iostream"
+#include "FC_NN.h"
+
+#include <Windows.h>
+#include <stdlib.h>
+#include <iostream>
 #include <math.h>
 #include <vector>
+#include <fstream>

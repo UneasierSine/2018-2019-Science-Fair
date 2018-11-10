@@ -23,8 +23,6 @@ FC_NN::FC_NN(std::string activationFunc, std::string errorFunctionName, vector<i
 		FC_NN::outputs.push_back(yeet);
 	}
 
-	FC_NN::bias = vector<double>(layers.size()-1,FC_NN::dist(0));
-
 	for (int i = 0; i < layers.size() - 1; i++)
 	{
 		FC_NN::weights.push_back(vector<vector<double>> (inputs[i + 1].size(), vector<double> (outputs[i].size(), dist(0))));
@@ -51,7 +49,7 @@ vector<double> FC_NN::feedforwardTemplate(vector<double> inputsVec)
 		std::transform(inputs[i].begin(), inputs[i].end(), outputs[i].begin(), activation);
 		for (int n = 0; n < inputs[i+1].size(); n++)
 		{
-			inputs[i + 1][n] = dotProduct(weights[i][n], outputs[i]) + bias[i];
+			inputs[i + 1][n] = dotProduct(weights[i][n], outputs[i]);
 		}
 	}
 
@@ -68,7 +66,7 @@ vector<double> FC_NN::feedforwardTemplate(vector<double> inputsVec, vector<vecto
 		std::transform(inputs[i].begin(), inputs[i].end(), outputs[i].begin(), activation);
 		for (int n = 0; n < inputs[i + 1].size(); n++)
 		{
-			inputs[i + 1][n] = dotProduct(weights[i][n], outputs[i]) + bias[i];
+			inputs[i + 1][n] = dotProduct(weights[i][n], outputs[i]);
 
 			double droppedOutSum = 0;
 			for (int dONeuron : droppedOut[i])
@@ -86,7 +84,6 @@ vector<double> FC_NN::feedforwardTemplate(vector<double> inputsVec, vector<vecto
 
 vector<double> FC_NN::feedforwardPreserve(vector<double> inputsVec)
 {
-	vector<double> biasClone = FC_NN::bias;
 	vector<vector<double>> inputsClone = FC_NN::inputs;
 	vector<vector<double>> outputsClone = FC_NN::outputs;
 	vector<vector<vector<double>>> weightsClone = FC_NN::weights;
@@ -98,7 +95,7 @@ vector<double> FC_NN::feedforwardPreserve(vector<double> inputsVec)
 		std::transform(inputsClone[i].begin(), inputsClone[i].end(), outputsClone[i].begin(), activation);
 		for (int n = 0; n < inputsClone[i + 1].size(); n++)
 		{
-			inputsClone[i + 1][n] = dotProduct(weightsClone[i][n], outputsClone[i]) + biasClone[i];
+			inputsClone[i + 1][n] = dotProduct(weightsClone[i][n], outputsClone[i]);
 		}
 	}
 
@@ -108,7 +105,6 @@ vector<double> FC_NN::feedforwardPreserve(vector<double> inputsVec)
 
 vector<double> FC_NN::feedforwardPreserve(vector<double> inputsVec, vector<vector<int>> droppedOut)
 {
-	vector<double> biasClone = FC_NN::bias;
 	vector<vector<double>> inputsClone = FC_NN::inputs;
 	vector<vector<double>> outputsClone = FC_NN::outputs;
 	vector<vector<vector<double>>> weightsClone = FC_NN::weights;
@@ -120,7 +116,7 @@ vector<double> FC_NN::feedforwardPreserve(vector<double> inputsVec, vector<vecto
 		std::transform(inputsClone[i].begin(), inputsClone[i].end(), outputsClone[i].begin(), activation);
 		for (int n = 0; n < inputsClone[i + 1].size(); n++)
 		{
-			inputsClone[i + 1][n] = dotProduct(weightsClone[i][n], outputsClone[i]) + biasClone[i];
+			inputsClone[i + 1][n] = dotProduct(weightsClone[i][n], outputsClone[i]);
 			
 			double droppedOutSum = 0;
 			for (int dONeuron : droppedOut[i])
@@ -141,6 +137,7 @@ vector<double> FC_NN::feedforwardError(vector<double> inputsVec, vector<double> 
 	vector<double> results = feedforwardPreserve(inputsVec);
 	vector<double> errors = vector<double>(results.size());
 	transform(labels.begin(), labels.end(), results.begin(), errors.begin(), errorFuncDeriv);
+	return errors;
 }
 
 vector<double> FC_NN::feedforwardError(vector<double> inputsVec, vector<vector<int>> droppedOut, vector<double> labels)
@@ -148,9 +145,53 @@ vector<double> FC_NN::feedforwardError(vector<double> inputsVec, vector<vector<i
 	vector<double> results = feedforwardPreserve(inputsVec, droppedOut);
 	vector<double> errors = vector<double>(results.size());
 	transform(labels.begin(), labels.end(), results.begin(), errors.begin(), errorFuncDeriv);
+	return errors;
 }
 
 vector<vector<vector<double>>> FC_NN::backprop(vector<double> actual, vector<double> predicted)
+{
+	vector<vector<double>> grads;
+	vector<double> biasGrads;
+	vector<double> errors = vector<double>(actual.size());
+
+	for (vector<double> column : inputs)
+	{
+		grads.push_back(vector<double>(column.size(), 0.0));
+	}
+
+	vector<vector<vector<double>>> weightGradients;
+	for (int x = 0; x < weights.size(); x++)
+	{
+		for (int y = 0; y < weights[x].size(); y++)
+		{
+			for (int z = 0; z < weights[x][y].size(); z++)
+			{
+				weightGradients[x][y][z] = 0.0;
+			}
+		}
+	}
+
+	transform(actual.begin(), actual.end(), predicted.begin(), errors.begin(), errorFuncDeriv);
+	grads[grads.size() - 1] = errors;
+
+	int layerNum = (int)grads.size() - 1;
+	while (layerNum > 0)
+	{
+		for_each(grads[layerNum].begin(), grads[layerNum].end(), activationDeriv);
+		for (int x = 0; x < grads[layerNum].size(); x++)
+		{
+			for (int y = 0; y < grads[layerNum - 1].size(); y++)
+			{
+				weightGradients[layerNum][x][y] = (grads[layerNum][y] * grads[layerNum + 1][x]);
+				grads[layerNum - 1][y] += weights[layerNum][x][y] * grads[layerNum + 1][x];
+			}
+		}
+		layerNum--;
+	}
+	return weightGradients;
+}
+
+vector<vector<vector<double>>> FC_NN::backprop(vector<double> actual, vector<double> predicted, vector<vector<int>> droppedOut)
 {
 	vector<vector<double>> grads;
 	vector<double> errors = vector<double>(actual.size());
@@ -183,13 +224,35 @@ vector<vector<vector<double>>> FC_NN::backprop(vector<double> actual, vector<dou
 		{
 			for (int y = 0; y < grads[layerNum - 1].size(); y++)
 			{
-				weightGradients[layerNum][x][y] = (grads[layerNum][y] * grads[layerNum+1][x]);
-				grads[layerNum - 1][y] += weights[layerNum][x][y] * grads[layerNum+1][x];
+				if (find(droppedOut[layerNum].begin(), droppedOut[layerNum].end(), y) != droppedOut[layerNum].end())
+				{
+					weightGradients[layerNum][x][y] = 0;
+					grads[layerNum - 1][y] += 0;
+				}
+				else
+				{
+					weightGradients[layerNum][x][y] = (grads[layerNum][y] * grads[layerNum + 1][x]);
+					grads[layerNum - 1][y] += weights[layerNum][x][y] * grads[layerNum + 1][x];
+				}
 			}
 		}
 		layerNum--;
 	}
 	return weightGradients;
+}
+
+void FC_NN::sgd(vector<vector<vector<double>>> weightGrads)
+{
+	for (int i = 0; i < weights.size(); i++)
+	{
+		for (int j = 0; j < weights[i].size(); j++)
+		{
+			for (int k = 0; k < weights[i][j].size(); k++)
+			{
+				weights[i][j][k] += -0.01 * (weightGrads[i][j][k]);
+			}
+		}
+	}
 }
 
 vector<vector<int>> dropoutNeurons(vector<int> layerData, double dropoutRate)

@@ -22,7 +22,6 @@ private:
 	gaussianRandom dist;
 
 	vector<int> NNlayers = { 0 };
-	vector<double> bias;
 	vector<vector<double>> inputs;
 	vector<vector<double>> outputs;
 	vector<vector<vector<double>>> weights;
@@ -46,6 +45,9 @@ public:
 	vector<double> feedforwardError(vector<double> inputsVec, vector<vector<int>> droppedOut, vector<double> labels);
 
 	vector<vector<vector<double>>> backprop(vector<double> actual, vector<double> predicted);
+	vector<vector<vector<double>>> backprop(vector<double> actual, vector<double> predicted, vector<vector<int>> droppedOut);
+
+	void sgd(vector<vector<vector<double>>> weightGrads);
 };
 
 vector<vector<int>> dropoutNeurons(vector<int> layerData, double dropoutRate);
