@@ -25,7 +25,7 @@ FC_NN::FC_NN(std::string activationFunc, std::string errorFunctionName, vector<i
 
 	for (int i = 0; i < layers.size() - 1; i++)
 	{
-		FC_NN::weights.push_back(vector<vector<double>> (inputs[i + 1].size(), vector<double> (outputs[i].size(), dist(0))));
+		FC_NN::weights.push_back(vector<vector<double>> (inputs[i + 1].size(), vector<double> (outputs[i].size(), rand()%2+1)));
 	}
 
 	int numNeurons = 0;
@@ -251,7 +251,7 @@ void FC_NN::sgd(vector<vector<vector<double>>> weightGrads)
 		{
 			for (int k = 0; k < weights[i][j].size(); k++)
 			{
-				weights[i][j][k] += -0.01 * (weightGrads[i][j][k]);
+				weights[i][j][k] += -0.25 * (weightGrads[i][j][k]);
 			}
 		}
 	}
