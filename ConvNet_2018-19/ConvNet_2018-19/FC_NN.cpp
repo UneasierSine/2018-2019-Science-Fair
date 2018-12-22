@@ -134,9 +134,9 @@ vector<double> FC_NN::feedforwardPreserve(vector<double> inputsVec, vector<vecto
 
 vector<double> FC_NN::feedforwardError(vector<double> inputsVec, vector<double> labels)
 {
-	vector<double> results = feedforwardPreserve(inputsVec);
+	vector<double> results = feedforwardTemplate(inputsVec);
 	vector<double> errors = vector<double>(results.size());
-	transform(labels.begin(), labels.end(), results.begin(), errors.begin(), errorFuncDeriv);
+	transform(labels.begin(), labels.end(), results.begin(), errors.begin(), errorFunc);
 	return errors;
 }
 
@@ -144,7 +144,7 @@ vector<double> FC_NN::feedforwardError(vector<double> inputsVec, vector<vector<i
 {
 	vector<double> results = feedforwardPreserve(inputsVec, droppedOut);
 	vector<double> errors = vector<double>(results.size());
-	transform(labels.begin(), labels.end(), results.begin(), errors.begin(), errorFuncDeriv);
+	transform(labels.begin(), labels.end(), results.begin(), errors.begin(), errorFunc);
 	return errors;
 }
 
@@ -152,7 +152,6 @@ vector<vector<vector<double>>> FC_NN::backprop(vector<double> actual, vector<dou
 {
 	vector<vector<double>> grads;
 	vector<double> biasGrads;
-	vector<double> errors = vector<double>(actual.size());
 
 	for (vector<double> column : inputs)
 	{
@@ -162,28 +161,31 @@ vector<vector<vector<double>>> FC_NN::backprop(vector<double> actual, vector<dou
 	vector<vector<vector<double>>> weightGradients;
 	for (int x = 0; x < weights.size(); x++)
 	{
+		weightGradients.push_back(vector<vector<double>>());
 		for (int y = 0; y < weights[x].size(); y++)
 		{
-			for (int z = 0; z < weights[x][y].size(); z++)
-			{
-				weightGradients[x][y][z] = 0.0;
-			}
+			weightGradients[x].push_back(vector<double>(weights[x][y].size(),1));
 		}
 	}
-
-	transform(actual.begin(), actual.end(), predicted.begin(), errors.begin(), errorFuncDeriv);
-	grads[grads.size() - 1] = errors;
+	
+	vector<double> error(actual.size());
+	transform(actual.begin(), actual.end(), predicted.begin(), error.begin(), errorFuncDeriv);
+	//set the errors to the last column of the network, index -> sizeOfVector - 1
+	grads[grads.size() - 1] = error;
 
 	int layerNum = (int)grads.size() - 1;
-	while (layerNum > 0)
+	while (layerNum > 1)
 	{
 		for_each(grads[layerNum].begin(), grads[layerNum].end(), activationDeriv);
 		for (int x = 0; x < grads[layerNum].size(); x++)
 		{
 			for (int y = 0; y < grads[layerNum - 1].size(); y++)
 			{
-				weightGradients[layerNum][x][y] = (grads[layerNum][y] * grads[layerNum + 1][x]);
-				grads[layerNum - 1][y] += weights[layerNum][x][y] * grads[layerNum + 1][x];
+				if (layerNum > 0)
+				{
+					weightGradients[layerNum-1][x][y] = (outputs[layerNum - 1][y] * grads[layerNum][x]);
+					grads[layerNum - 1][y] += weights[layerNum-1][x][y] * grads[layerNum][x];
+				}
 			}
 		}
 		layerNum--;

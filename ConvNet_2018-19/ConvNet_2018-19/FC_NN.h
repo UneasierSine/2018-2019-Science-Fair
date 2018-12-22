@@ -7,6 +7,7 @@
 #include <math.h>
 #include <string>
 #include <iterator>
+#include <iostream>
 #include <random>
 
 class FC_NN
