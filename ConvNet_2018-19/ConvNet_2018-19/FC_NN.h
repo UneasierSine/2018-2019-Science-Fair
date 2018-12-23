@@ -43,6 +43,7 @@ public:
 	vector<double> feedforwardPreserve(vector<double> inputsVec, vector<vector<int>> droppedOut);
 
 	vector<double> feedforwardError(vector<double> inputsVec, vector<double> labels);
+	vector<double> feedforwardAccuracy(vector<double> inputsVec, vector<double> labels);
 	vector<double> feedforwardError(vector<double> inputsVec, vector<vector<int>> droppedOut, vector<double> labels);
 
 	vector<vector<vector<double>>> backprop(vector<double> actual, vector<double> predicted);

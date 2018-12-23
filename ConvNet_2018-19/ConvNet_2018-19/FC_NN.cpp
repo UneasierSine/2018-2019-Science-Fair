@@ -148,6 +148,18 @@ vector<double> FC_NN::feedforwardError(vector<double> inputsVec, vector<vector<i
 	return errors;
 }
 
+vector<double> FC_NN::feedforwardAccuracy(vector<double> inputsVec, vector<double> labels)
+{
+	vector<double> results = feedforwardPreserve(inputsVec);
+	vector<double> accuracy = vector<double>(results.size());
+	transform(results.begin(), results .end(), labels.begin(), accuracy.begin(), errorFunc);
+	for (int i = 0; i < accuracy.size(); i++)
+	{
+		accuracy[i] = 1.0 - ( accuracy[i] / (labels[i]) );
+	}
+	return accuracy;
+}
+
 vector<vector<vector<double>>> FC_NN::backprop(vector<double> actual, vector<double> predicted)
 {
 	vector<vector<double>> grads;
