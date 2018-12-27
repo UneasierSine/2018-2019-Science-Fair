@@ -17,6 +17,7 @@ baseKernels.append(np.array(1,-2,0,-2,1))
 baseKernels.append(np.array(-1,0,2,0,-1))
 baseKernels.append(np.array(1,-4,6,-4,1))
 
+#take images and process each image to make array of 16 convoluted versions of the base and add that to massive numpy
 def kernelPreProcess(raw_images):
     processed_images = np.zeros((raw_images.shape, 16))
     for n in range(raw_images):
@@ -26,41 +27,24 @@ def kernelPreProcess(raw_images):
             for y in range(4):
                 imageForms.append(cv2.filter2D(src=raw_images[n],ddepth=-1,kernel=np.multiply(baseKernels[x],np.reshape(baseKernels[y],[5,1]))))
         processed_images.append(imageForms)
+    return processed_images
 
-#get directory of input images
-train_dir = askdirectory()
-#get labels pickle and convert to dataframe
-labels_file = askopenfilename()
-labels = pd.read_pickle(labels_file)
-
-#create array of images and store images in the directory to the array
-train_images = []
-for file in os.listdir(train_dir):
+#get directory of input images and create array of images and store images in the directory to the array
+images_dir = askdirectory()
+dataset_images = []
+for file in os.listdir(images_dir):
     filename = os.fsdecode(file)
     img = cv2.imread(dir + "/" + filename, 1)
-    images.append(img)
+    dataset_images.append(img)
 
-#get filename of .csv file of the image labels
-train_filename = askopenfilename()
-train_labels = np.genfromtxt(filename, delimiter=",", skip_header=1)
+#get labels pickle and convert to dataframe then sort by the filename to go along with the images
+labels_file = askopenfilename()
+labels = pd.read_pickle(labels_file)
+labels.sort_values(by=['Filename'])
 
 #images are x and labels are y
 X_train = kernelPreProcess(train_images)
 y_train = kernelPreProcess(train_labels)
-
-#get directory of input images
-test_dir = askdirectory()
-
-#create array of images and store images in the directory to the array
-test_images = []
-for file in os.listdir(test_dir):
-    filename = os.fsdecode(file)
-    img = cv2.imread(dir + "/" + filename, 1)
-    images.append(img)
-
-#get filename of .csv file of the image labels
-test_filename = askopenfilename()
-test_labels = np.genfromtxt(filename, delimiter=",", skip_header=1)
 
 #images are x and labels are y
 X_test = kernelPreProcess(test_images)
@@ -81,7 +65,7 @@ y_test = kernelPreProcess(test_labels)
 model = Sequential()
 
 #add model layers
-model.add(Conv2D(64, kernel_size=3, activation='relu', input_shape=(28,28,1)))
+model.add(Conv2D(64, kernel_size=3, activation='relu', input_shape=(1280,720,16)))
 model.add(Conv2D(32, kernel_size=3, activation='relu'))
 model.add(Flatten())
 model.add(Dense(10, activation='softmax'))
